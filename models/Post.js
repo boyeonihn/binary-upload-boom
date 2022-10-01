@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({   // template of the document for the Post 
   title: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const PostSchema = new mongoose.Schema({
     ref: "User",
   },
   createdAt: {
-    type: Date,
+    type: Date,       // storing it by Date 
     default: Date.now,
   },
 });

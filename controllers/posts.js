@@ -4,7 +4,7 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id });   // find document in the Post collection that has user property of req.user.id (logged in user) - aka, we are finding only the posts w/ the user iD 
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -12,16 +12,16 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const posts = await Post.find().sort({ createdAt: "desc" }).lean();  // find the posts and sort them by created date order // Post = model 
+      res.render("feed.ejs", { posts: posts }); // we are rendering by passing it to the EJS and we're going to call it EJS
     } catch (err) {
       console.log(err);
     }
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id);    // find the post based on its id - I can grab the id from the url post/:id 
+      res.render("post.ejs", { post: post, user: req.user });   // current session running - there is a user property on the request that comes through 
     } catch (err) {
       console.log(err);
     }
